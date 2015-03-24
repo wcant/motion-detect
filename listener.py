@@ -5,6 +5,8 @@ import picamera
 import gps
 import time
 
+camera = picamera.PiCamera()
+
 #--------------- GPIO Setup ------------------------------#
 
 GPIO.setmode(GPIO.BCM)
@@ -26,7 +28,11 @@ session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
 def eventTrigger(channel):
 
 	print("Motion Detected")
-
+	time_str = time.ctime()
+	img_path = 'images/'+time_str.replace(" ", "_")+'.jpg'
+	camera.capture(img_path)
+	
+	#maybe call logger.py here and add to database
 
 #--------------- Event Listener --------------------------#
 try:
