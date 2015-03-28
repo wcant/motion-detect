@@ -54,9 +54,9 @@ def eventTrigger(channel):
 	print(time_str)
 
 #	list_to_write = [day,dayn,mon,year,hour,minu,sec]	
-	cursor.execute("INSERT INTO log VALUES (NULL, "+day+","+dayn+","+mon+","+year+","+hour+","+minu+","+sec+","+"NULL"+","+img_path+");")	
-	cursor.commit()
-	cursor.close()
+	exec_string ="INSERT INTO log VALUES (NULL,\'"+day+"\',"+dayn+",\'"+mon+"\',"+year+","+hour+","+minu+","+sec+","+"NULL"+",\'"+img_path+"\');" 
+	cursor.execute(exec_string)
+	dbcon.commit()
 	#maybe call logger.py here and add to database
 
 #--------------- Event Listener --------------------------#
@@ -75,4 +75,5 @@ except KeyboardInterrupt:
 
 finally:
 
+	cursor.close()
 	GPIO.cleanup()
