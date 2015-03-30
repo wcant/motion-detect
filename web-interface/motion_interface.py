@@ -1,10 +1,15 @@
 import sqlite3
-from bottle import route, run, debug
+from bottle import Bottle, route, run, debug
 from bottle import redirect, request, template
 
-@route("/")
-@route("/motion-detect-interface")
-def log_list():
+app = Bottle()
+
+@route('/')
+def home():
+		return 'Hello'
+
+@route('/list')
+def list():
 		"""
 		Show motion detect records in a table
 		"""
@@ -17,6 +22,4 @@ def log_list():
 		output = template("motion_log", rows=result)
 		return output
 
-if __name__ == "__main__":
-		debug(True)
-		run()
+run(app, host='10.1.10.91', port=8080, debug=True)
