@@ -38,8 +38,8 @@ def eventTrigger(channel):
 	time_str = time.ctime()
 	time_str = time_str.replace(" ", "")
 	time_str = time_str.replace(":", "")
-	img_path = '/usr/share/nginx/www/images/'+time_str+'.jpg'
-
+	img_path = '/home/pi/motion-detect/images/'+time_str+'.jpg'
+	img_name = time_str+'.jpg'
 	camera.capture(img_path)
 
 	#get image ready for insert
@@ -54,7 +54,7 @@ def eventTrigger(channel):
 	print(time_str)
 
 #	list_to_write = [day,dayn,mon,year,hour,minu,sec]	
-	exec_string ="INSERT INTO log VALUES (NULL,\'"+day+"\',"+dayn+",\'"+mon+"\',"+year+","+hour+","+minu+","+sec+","+"NULL"+",\'"+img_path+"\');" 
+	exec_string ="INSERT INTO log VALUES (NULL,\'"+day+"\',"+dayn+",\'"+mon+"\',"+year+","+hour+","+minu+","+sec+","+"\'"+img_name+"\');" 
 	cursor.execute(exec_string)
 	dbcon.commit()
 	#maybe call logger.py here and add to database

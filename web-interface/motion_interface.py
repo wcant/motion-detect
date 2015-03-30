@@ -1,14 +1,18 @@
 import sqlite3
 from bottle import Bottle, route, run, debug
-from bottle import redirect, request, template
+from bottle import redirect, request, template, static_file
 
 app = Bottle()
 
-@route('/')
+@app.route('/')
 def home():
-		return 'Hello'
+		return '<a href="/list">Link to list</a>'
 
-@route('/list')
+@app.route('/images/:filename')
+def send_image(filename):
+    return static_file(filename , root='/home/pi/motion-detect/images', mimetype='image/jpg')
+
+@app.route('/list')
 def list():
 		"""
 		Show motion detect records in a table
@@ -22,4 +26,4 @@ def list():
 		output = template("motion_log", rows=result)
 		return output
 
-run(app, host='10.1.10.91', port=8080, debug=True)
+app.run(host='10.1.10.91', port=8080, debug=True)
