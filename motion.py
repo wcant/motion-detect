@@ -6,7 +6,7 @@ import time
 #set up GPIO using BCM numbering
 GPIO.setmode(GPIO.BCM)
 
-PIR_PIN = 4
+PIR_PIN = 22
 GPIO.setup(PIR_PIN, GPIO.IN)
 
 print "PIR Module Test (CTRL+C to exit)"
